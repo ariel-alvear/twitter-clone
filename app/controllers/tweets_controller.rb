@@ -12,7 +12,11 @@ class TweetsController < ApplicationController
 
   # GET /tweets/new
   def new
-    @tweet = Tweet.new
+    if user_signed_in?
+      @tweet = Tweet.new
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   # GET /tweets/1/edit
