@@ -4,6 +4,8 @@ class Tweet < ApplicationRecord
     has_many :retweets, class_name: "Tweet", foreign_key: "Tweet_id"
     belongs_to :tweet, class_name: "Tweet", optional: true
 
+    validates :content, presence: true
+
     def get_user_name
         self.user.name
     end
