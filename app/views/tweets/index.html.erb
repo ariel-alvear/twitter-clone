@@ -14,7 +14,7 @@
     <% @tweets.each do |tweet| %>
       <tr>
         <td><%= tweet.get_user_name %></td>
-        <td><%= tweet.get_user_photo %></td>
+        <td><img src="<%= tweet.get_user_photo %>" width="50" height="50"></td>
       </tr>
       <tr>
         <td><%= tweet.content %></td>
