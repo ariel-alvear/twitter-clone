@@ -13,6 +13,10 @@
   <tbody>
     <% @tweets.each do |tweet| %>
       <tr>
+        <td><%= tweet.get_user_name %></td>
+        <td><%= tweet.get_user_photo %></td>
+      </tr>
+      <tr>
         <td><%= tweet.content %></td>
         <td><%= link_to 'Show', tweet %></td>
         <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
