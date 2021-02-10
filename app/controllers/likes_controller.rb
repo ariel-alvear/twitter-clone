@@ -3,6 +3,7 @@ class LikesController < ApplicationController
     def create
         if user_signed_in?
             @tweet.likes.create(user_id: current_user.id)
+            redirect_to root_path
         else
             redirect_to new_user_session_path
         end
