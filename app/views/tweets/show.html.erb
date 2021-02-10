@@ -7,3 +7,5 @@
 
 <%= link_to 'Edit', edit_tweet_path(@tweet) %> |
 <%= link_to 'Back', tweets_path %>
+
+<p><%= @tweet.likes.count %> <%= (@tweet.likes.count) == 1 ? 'Like' : 'Likes'%></p>
