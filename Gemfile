@@ -60,3 +60,9 @@ gem 'devise'
 
 # A Scope & Engine based, clean, powerful, customizable and sophisticated paginator for modern web app frameworks and ORMs
 gem 'kaminari'
+
+# Better Errors replaces the standard Rails error page with a much better and more useful error page. It is also usable outside of Rails in any Rack app as Rack middleware.
+group :development do
+  gem "better_errors"
+  gem "binding_of_caller"
+end
