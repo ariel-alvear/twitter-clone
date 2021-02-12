@@ -29,19 +29,31 @@
         
         <!-- mostramos cantidad de likes -->
         <td>
-          <%= tweet.likes.count %> <%= (tweet.likes.count) == 1 ? 'Like' : 'Likes'%></td>
-        <td>
+          <%= tweet.likes.count %> <%= (tweet.likes.count) == 1 ? 'Like' : 'Likes'%>
+        </td>
 
         <!-- mostramos cantidad de retweets -->
         <td>
-          <%= tweet.retweets.count %> <%= (tweet.retweets.count) == 1 ? 'Retweet' : 'Retweets'%></td>
-        <td>
+          <%= tweet.retweets.count %> <%= (tweet.retweets.count) == 1 ? 'Retweet' : 'Retweets'%>
+        </td>
         
+        <!-- mostramos fecha de creación -->
+        <% if tweet.created_at != DateTime.current.to_date %>
+          <td>
+            <%= "Created at: #{tweet.created_at.strftime("%d")}/#{tweet.created_at.strftime("%m")}"%>
+          </td>
+        <% else %>
+          <td>
+            <%= 'Created at:' %><%= tweet.created_at.strftime("%H%M") %>
+          </td>
+        <% end %>
+
+        <td>
         <!-- verificamos que el usuario haya hecho like -->
         <% pre_like = tweet.likes.find { |like| like.user_id == current_user.id} %>
 
         <!-- si ya hizo like, mostramos boton unlike, sino, boton like -->
-        <% if pre_like %>
+        <% if pre_like %>  
           <%= button_to 'Unlike', tweet_like_path(tweet.id, pre_like), method: :delete %>
         <% else %>
           <%= button_to 'Like', tweet_likes_path(tweet_id: tweet.id), method: :post %>
