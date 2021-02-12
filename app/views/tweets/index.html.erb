@@ -31,6 +31,11 @@
         <td>
           <%= tweet.likes.count %> <%= (tweet.likes.count) == 1 ? 'Like' : 'Likes'%></td>
         <td>
+
+        <!-- mostramos cantidad de retweets -->
+        <td>
+          <%= tweet.retweets.count %> <%= (tweet.retweets.count) == 1 ? 'Retweet' : 'Retweets'%></td>
+        <td>
         
         <!-- verificamos que el usuario haya hecho like -->
         <% pre_like = tweet.likes.find { |like| like.user_id == current_user.id} %>
@@ -43,9 +48,10 @@
         <% end %>
         </td>
 
+        <!-- habilitamos boton de retweet -->
         <td>
           <% if user_signed_in? %>
-            <%= button_to 'Retweet', new_tweet_tweet_path(tweet.id) %>
+            <%= button_to 'Retweet', retweet_path(tweet.id), method: :get %>
           <% end %>
         </td>
         
@@ -66,7 +72,7 @@
 
 
 
-
+<!-- paginamos los tweets -->
 <div class="row">
   <div class="col-md-8 offset-md-2">
     <%= paginate @tweets %>

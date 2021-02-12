@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :likes
   end
   
-  post '/tweets/:id/tweets/new', to: 'tweets#new'
+  get '/tweets/retweet/:id', to: 'tweets#retweet', as: 'retweet'
 
   devise_for :users
 

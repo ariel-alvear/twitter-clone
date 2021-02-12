@@ -27,8 +27,9 @@ class TweetsController < ApplicationController
   # POST /tweets or /tweets.json
   def create
     @tweet = Tweet.new(tweet_params)
-    @tweet.tweet_id = params[:id]
     @tweet.user_id = current_user.id
+    @tweet.tweet_id = @retweet
+    
 
     respond_to do |format|
       if @tweet.save
@@ -61,6 +62,11 @@ class TweetsController < ApplicationController
       format.html { redirect_to tweets_url, notice: "Tweet was successfully destroyed." }
       format.json { head :no_content }
     end
+  end
+
+  def retweet
+    @tweet = Tweet.new
+    @retweet = params[:id]
   end
 
   private
