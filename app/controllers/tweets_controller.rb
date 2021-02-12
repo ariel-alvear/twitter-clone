@@ -28,7 +28,8 @@ class TweetsController < ApplicationController
   def create
     @tweet = Tweet.new(tweet_params)
     @tweet.user_id = current_user.id
-    @tweet.tweet_id = @retweet
+    @tweet.tweet_id = @@retweet
+    byebug
     
 
     respond_to do |format|
@@ -66,7 +67,7 @@ class TweetsController < ApplicationController
 
   def retweet
     @tweet = Tweet.new
-    @retweet = params[:id]
+    @@retweet = params[:id]
   end
 
   private
