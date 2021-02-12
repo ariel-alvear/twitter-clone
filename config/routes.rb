@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     resources :likes
   end
   
+  post '/tweets/:id/tweets/new', to: 'tweets#new'
+
   devise_for :users
 
   root to: 'tweets#index'
