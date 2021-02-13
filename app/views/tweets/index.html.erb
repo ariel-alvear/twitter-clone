@@ -45,8 +45,9 @@
         
         <!-- verificamos que el usuario haya hecho like -->
         <td>
-        <% pre_like = tweet.likes.find { |like| like.user_id == current_user.id} %>
-
+          <% if user_signed_in? %>
+            <% pre_like = tweet.likes.find { |like| like.user_id == current_user.id} %>
+          <% end %>
         <!-- si ya hizo like, mostramos boton unlike, sino, boton like -->
         <% if pre_like %>  
           <%= button_to 'Unlike', tweet_like_path(tweet.id, pre_like), method: :delete %>

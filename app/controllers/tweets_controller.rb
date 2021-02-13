@@ -5,6 +5,7 @@ class TweetsController < ApplicationController
   def index
     @tweets = Tweet.all.page(params[:page]).order("created_at DESC")
     @tweet = Tweet.new
+    @retweet = Tweet.new
   end
 
   # GET /tweets/1 or /tweets/1.json
@@ -29,12 +30,14 @@ class TweetsController < ApplicationController
   def create
     @tweet = Tweet.new(tweet_params)
     @tweet.user_id = current_user.id
-    @tweet.tweet_id = @@retweet
+    if @retweet
+      @tweet.tweet_id = @@retweet
+    end
     
 
     respond_to do |format|
       if @tweet.save
-        format.html { redirect_to @tweet, notice: "Tweet was successfully created." }
+        format.html { redirect_to root_path, notice: "Tweet was successfully created." }
         format.json { render :show, status: :created, location: @tweet }
       else
         format.html { render :new, status: :unprocessable_entity }
