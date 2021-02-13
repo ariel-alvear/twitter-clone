@@ -38,18 +38,13 @@
         </td>
         
         <!-- mostramos fecha de creación -->
-        <% if tweet.created_at != DateTime.current.to_date %>
-          <td>
-            <%= "Created at: #{tweet.created_at.strftime("%d")}/#{tweet.created_at.strftime("%m")}"%>
-          </td>
-        <% else %>
-          <td>
-            <%= 'Created at:' %><%= tweet.created_at.strftime("%H%M") %>
-          </td>
-        <% end %>
-
         <td>
+            <%= "Created #{time_ago_in_words(tweet.created_at)} ago" %>
+        </td>
+
+        
         <!-- verificamos que el usuario haya hecho like -->
+        <td>
         <% pre_like = tweet.likes.find { |like| like.user_id == current_user.id} %>
 
         <!-- si ya hizo like, mostramos boton unlike, sino, boton like -->
