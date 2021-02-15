@@ -27,7 +27,7 @@
         <!-- iteramos los likes para traer los id de usuario y luego sus fotos -->
         <% Like.where(tweet_id: @tweet.id).each do |photo| %>
           <% photo_url =  photo.user_id %>
-          <%= User.find(photo_url).photo_url%>
+            <img src="<%= User.find(photo_url).photo_url%>" widht="80" height="80">
         <% end %>
       </td>
   </tbody>
