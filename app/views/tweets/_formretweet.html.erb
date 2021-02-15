@@ -1,10 +1,13 @@
 <%= form_with(model: tweet) do |form| %>
-    <div class="field">
-        <%= form.label :content %>
-        <%= form.text_field :content %>
+    <div class="card text-center" style="width: 45rem">
+        <h5 class="card-title pt-2">Crear nuevo tweet</h5>
+        <div class="form-group">
+            <%= form.text_area(:content, cols: 50, rows: 5) %>
+        </div>
+        <div class="actions my-2">
+        <button type="button" class="btn btn-primary">
+            <%= form.submit "Crear nuevo tweet", :class => 'btn btn-primary' %>
+        </button>
+        </div>
     </div>
-
-    <div class="actions">
-        <%= form.submit %>
-    </div>
-<% end %>
+    <% end %>

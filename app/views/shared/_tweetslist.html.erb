@@ -1,36 +1,40 @@
 <!-- iteramos cada tweet para que se desplieguen en nuestro index -->
 <% @tweets.each do |tweet| %>
-    <div class="card mt-1" style="width: 32rem;">
+    <div class="card my-2" style="width: 45rem;">
         <div class="card-body">
             <h5 class="card-title"><%= tweet.get_user_name %></h5>
             <img src="<%= tweet.get_user_photo %>" width="60" height="60">
             <p class="card-text"><%= tweet.content %></p>
             <%= link_to "Created #{time_ago_in_words(tweet.created_at)} ago", tweet %>
         </div>
+
+        <div class="text-right">
+            <div class="d-inline-block">
             <!-- mostramos cantidad de likes -->
             <%= tweet.likes.count %> <%= (tweet.likes.count) == 1 ? 'Like' : 'Likes'%>
+            </div>
             <!-- mostramos cantidad de retweets -->
             <%= tweet.retweets.count %> <%= (tweet.retweets.count) == 1 ? 'Retweet' : 'Retweets'%>
-            <!-- verificamos que el usuario haya hecho like -->
-            <% if user_signed_in? %>
-                <% pre_like = tweet.likes.find { |like| like.user_id == current_user.id} %>
-            <% end %>
-            <!-- si ya hizo like, mostramos boton unlike, sino, boton like -->
-            <% if pre_like %>  
-                <%= button_to 'Unlike', tweet_like_path(tweet.id, pre_like), method: :delete %>
-            <% else %>
-                <%= button_to 'Like', tweet_likes_path(tweet_id: tweet.id), method: :post %>
-            <% end %>
-            <!-- habilitamos boton de retweet -->
-            <% if user_signed_in? %>
-                <%= button_to 'Retweet', retweet_path(tweet.id), method: :get %>
-            <% end %>
-            <!-- mostramos fotos de likes -->
-            <%= link_to "Created #{time_ago_in_words(tweet.created_at)} ago", tweet %>
-            <!-- solo el propio usuario puede editar y borrar su tweet -->
-            <% if user_signed_in? && tweet.user_id == current_user.id %>
-                <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
-                <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            <% end %>
+        </div>
+        <!-- verificamos que el usuario haya hecho like -->
+        <% if user_signed_in? %>
+            <% pre_like = tweet.likes.find { |like| like.user_id == current_user.id} %>
+        <% end %>
+
+        <!-- si ya hizo like, mostramos boton unlike, sino, boton like -->
+        <% if pre_like %>  
+            <%= button_to 'Unlike', tweet_like_path(tweet.id, pre_like), method: :delete, :class => 'btn btn-primary' %>
+        <% else %>
+            <%= button_to 'Like', tweet_likes_path(tweet_id: tweet.id), method: :post, :class => 'btn btn-primary' %>
+        <% end %>
+        <!-- habilitamos boton de retweet -->
+        <% if user_signed_in? %>
+            <%= button_to 'Retweet', retweet_path(tweet.id), method: :get, :class => 'btn btn-primary' %>
+        <% end %>
+        <!-- solo el propio usuario puede editar y borrar su tweet -->
+        <% if user_signed_in? && tweet.user_id == current_user.id %>
+            <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
+            <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
     </div>
 <% end %>
