@@ -11,12 +11,13 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_field :content %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="card text-center" style="width: 32rem">
+    <h5 class="card-title pt-2">Crear nuevo tweet</h5>
+    <div class="form-group">
+        <%= form.text_area(:content, cols: 50, rows: 5) %>
+    </div>
+    <div class="actions my-2">
+      <%= form.submit "Crear nuevo tweet" %>
+    </div>
   </div>
 <% end %>

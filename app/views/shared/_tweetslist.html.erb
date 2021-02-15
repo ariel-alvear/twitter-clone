@@ -1,0 +1,54 @@
+<!-- iteramos cada tweet para que se desplieguen en nuestro index -->
+<% @tweets.each do |tweet| %>
+    <tr>
+        <td><%= tweet.get_user_name %></td>
+        <td><img src="<%= tweet.get_user_photo %>" width="50" height="50"></td>
+    </tr>
+    <tr>
+        <td>
+            <%= tweet.content %>
+        </td>
+        
+        <!-- mostramos cantidad de likes -->
+        <td>
+            <%= tweet.likes.count %> <%= (tweet.likes.count) == 1 ? 'Like' : 'Likes'%>
+        </td>
+
+        <!-- mostramos cantidad de retweets -->
+        <td>
+            <%= tweet.retweets.count %> <%= (tweet.retweets.count) == 1 ? 'Retweet' : 'Retweets'%>
+        </td>
+        
+        <!-- verificamos que el usuario haya hecho like -->
+        <td>
+        <% if user_signed_in? %>
+            <% pre_like = tweet.likes.find { |like| like.user_id == current_user.id} %>
+        <% end %>
+        <!-- si ya hizo like, mostramos boton unlike, sino, boton like -->
+        <% if pre_like %>  
+            <%= button_to 'Unlike', tweet_like_path(tweet.id, pre_like), method: :delete %>
+        <% else %>
+            <%= button_to 'Like', tweet_likes_path(tweet_id: tweet.id), method: :post %>
+        <% end %>
+        </td>
+
+        <!-- habilitamos boton de retweet -->
+        <td>
+        <% if user_signed_in? %>
+            <%= button_to 'Retweet', retweet_path(tweet.id), method: :get %>
+        <% end %>
+        </td>
+
+        <!-- mostramos fotos de likes -->
+        <td>
+            <%= link_to "Created #{time_ago_in_words(tweet.created_at)} ago", tweet %>
+        </td>
+        
+
+        <!-- solo el propio usuario puede editar y borrar su tweet -->
+        <% if user_signed_in? && tweet.user_id == current_user.id %>
+            <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
+            <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+    </tr>
+<% end %>
