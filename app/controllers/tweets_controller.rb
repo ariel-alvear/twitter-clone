@@ -5,7 +5,6 @@ class TweetsController < ApplicationController
   def index
     @tweets = Tweet.all.page(params[:page]).order("created_at DESC")
     @tweet = Tweet.new
-    @retweet = Tweet.new
   end
 
   # GET /tweets/1 or /tweets/1.json
@@ -16,7 +15,6 @@ class TweetsController < ApplicationController
   def new
     if user_signed_in?
       @tweet = Tweet.new
-      @retweet = Tweet.new
     else
       redirect_to new_user_session_path
     end
@@ -30,9 +28,7 @@ class TweetsController < ApplicationController
   def create
     @tweet = Tweet.new(tweet_params)
     @tweet.user_id = current_user.id
-    if @retweet
-      @tweet.tweet_id = @@retweet
-    end
+    @tweet.tweet_id = @@retweet
     
 
     respond_to do |format|
