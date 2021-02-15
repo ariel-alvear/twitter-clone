@@ -13,4 +13,8 @@ class Tweet < ApplicationRecord
     def get_user_photo
         self.user.photo_url
     end
+
+    def get_like_photo
+        self.likes.user_id.photo_url
+    end
 end
