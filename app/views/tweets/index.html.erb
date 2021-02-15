@@ -83,6 +83,7 @@
 <!-- paginamos los tweets -->
 <div class="row">
   <div class="col-md-8 offset-md-2">
-    <%= paginate @tweets %>
+    <%= link_to_next_page @tweets, 'Mostrar más tweets' %>
+    <%= link_to_prev_page @tweets, 'Volver a tweets anteriores' %>
   </div>
 </div>
