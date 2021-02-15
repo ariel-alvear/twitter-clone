@@ -5,7 +5,10 @@
   <%= @tweet.content %>
 </p>
 
-<%= link_to 'Edit', edit_tweet_path(@tweet) %> |
+<% if @tweet.user_id == current_user.id %>
+  <%= link_to 'Edit', edit_tweet_path(@tweet) %> |
+<% end %>
+
 <%= link_to 'Back', tweets_path %>
 
 <p><%= @tweet.likes.count %> <%= (@tweet.likes.count) == 1 ? 'Like' : 'Likes'%></p>
