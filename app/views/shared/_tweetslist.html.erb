@@ -36,5 +36,16 @@
             <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
             <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         <% end %>
+
+        <!-- agregamos vista retweet-->
+        <% if tweet.tweet_id %>
+            <% if tweet.tweet_id > 0 %>
+                <% retweet_id = tweet.tweet_id %>
+                <% retweet = Tweet.find(retweet_id) %>
+                <%= retweet.get_user_name %>
+                <img src="<%= retweet.get_user_photo %>" width="60" height="60">
+                <%= retweet.content %>
+            <% end %>
+        <% end %>
     </div>
 <% end %>
