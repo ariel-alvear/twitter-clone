@@ -19,22 +19,19 @@
         <!-- verificamos que el usuario haya hecho like -->
         <% if user_signed_in? %>
             <% pre_like = tweet.likes.find { |like| like.user_id == current_user.id} %>
-        <% end %>
-
-        <!-- si ya hizo like, mostramos boton unlike, sino, boton like -->
-        <% if pre_like %>  
-            <%= button_to 'Unlike', tweet_like_path(tweet.id, pre_like), method: :delete, :class => 'btn btn-primary' %>
-        <% else %>
-            <%= button_to 'Like', tweet_likes_path(tweet_id: tweet.id), method: :post, :class => 'btn btn-primary' %>
-        <% end %>
-        <!-- habilitamos boton de retweet -->
-        <% if user_signed_in? %>
+            <!-- si ya hizo like, mostramos boton unlike, sino, boton like -->
+            <% if pre_like %>
+                <%= button_to 'Unlike', tweet_like_path(tweet.id, pre_like), method: :delete, :class => 'btn btn-primary' %>
+            <% else %>
+                <%= button_to 'Like', tweet_likes_path(tweet_id: tweet.id), method: :post, :class => 'btn btn-primary' %>
+            <% end %>
+            <!-- habilitamos boton de retweet -->
             <%= button_to 'Retweet', retweet_path(tweet.id), method: :get, :class => 'btn btn-primary' %>
-        <% end %>
-        <!-- solo el propio usuario puede editar y borrar su tweet -->
-        <% if user_signed_in? && tweet.user_id == current_user.id %>
-            <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
-            <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <!-- solo el propio usuario puede editar y borrar su tweet -->
+            <% if tweet.user_id == current_user.id %>
+                <td><%= link_to 'Edit', edit_tweet_path(tweet) %></td>
+                <td><%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
         <% end %>
 
         <!-- agregamos vista retweet-->
