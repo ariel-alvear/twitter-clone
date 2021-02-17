@@ -29,8 +29,20 @@
                         </div>
                     <% end %>
                 <% end %>
+                <!-- modal para mostrar likes -->
                 <div class="d-block">
-                    <%= link_to "Created #{time_ago_in_words(tweet.created_at)} ago", tweet %>
+                    <%= link_to "Created #{time_ago_in_words(tweet.created_at)} ago", '#exampleModal', 'data-toggle' => 'modal' %>  
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    <%= render 'shared/likesmodal', tweet: Tweet.find(tweet.id) %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="d-inline-block ml-2 col-md-4" style="width:100">

@@ -1,24 +1,16 @@
-<!-- fotos de likes -->
-<table>
-  <thead>
-    <tr>
-      <th>Likes</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<h2>Likes</h2>
 
-  <tbody>
-    <tr>
-      <td>
-        <!-- iteramos los likes para traer los id de usuario y luego sus fotos -->
-        <p><%= @tweet.likes.count %> <%= (@tweet.likes.count) == 1 ? 'Like' : 'Likes'%></p>
-        <% Like.where(tweet_id: @tweet.id).each do |photo| %>
-          <% photo_url =  photo.user_id %>
-            <img src="<%= User.find(photo_url).photo_url%>" width="60" height="60" class="rounded-circle">
-        <% end %>
-      </td>
-  </tbody>
-</table>
+<div class="container">
+  <!-- iteramos los likes para traer los id de usuario y luego sus fotos -->
+  <p><%= @tweet.likes.count %> <%= (@tweet.likes.count) == 1 ? 'Like' : 'Likes'%></p>
+  <div>
+    <% Like.where(tweet_id: @tweet.id).each do |photo| %>
+      <% photo_url =  photo.user_id %>
+        <img src="<%= User.find(photo_url).photo_url%>" width="60" height="60" class="rounded-circle">
+        <p><%= User.find(photo_url).name %></p>
+    <% end %>
+  </div>
+</div>
 
 <br>
 
