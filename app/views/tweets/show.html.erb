@@ -1,17 +1,3 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Content:</strong>
-  <%= @tweet.content %>
-</p>
-
-<% if @tweet.user_id == current_user.id %>
-  <%= link_to 'Edit', edit_tweet_path(@tweet) %> 
-<% end %>
-
-<p><%= @tweet.likes.count %> <%= (@tweet.likes.count) == 1 ? 'Like' : 'Likes'%></p>
-
-
 <!-- fotos de likes -->
 <table>
   <thead>
@@ -25,12 +11,15 @@
     <tr>
       <td>
         <!-- iteramos los likes para traer los id de usuario y luego sus fotos -->
+        <p><%= @tweet.likes.count %> <%= (@tweet.likes.count) == 1 ? 'Like' : 'Likes'%></p>
         <% Like.where(tweet_id: @tweet.id).each do |photo| %>
           <% photo_url =  photo.user_id %>
-            <img src="<%= User.find(photo_url).photo_url%>" widht="80" height="80">
+            <img src="<%= User.find(photo_url).photo_url%>" width="60" height="60" class="rounded-circle">
         <% end %>
       </td>
   </tbody>
 </table>
+
+<br>
 
 <%= link_to 'Back', tweets_path %>
