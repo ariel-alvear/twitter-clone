@@ -9,9 +9,11 @@
                     <p><%= tweet.content %></p>
                 </div>
                 <!-- solo el propio usuario puede editar y borrar su tweet -->
-                <% if tweet.user_id == current_user.id %>
-                    <%= link_to 'Edit', edit_tweet_path(tweet) %></td>
-                    <%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %>
+                <% if user_signed_in? %>
+                    <% if tweet.user_id == current_user.id %>
+                        <%= link_to 'Edit', edit_tweet_path(tweet) %></td>
+                        <%= link_to 'Destroy', tweet, method: :delete, data: { confirm: 'Are you sure?' } %>
+                    <% end %>
                 <% end %>
                 <!-- agregamos vista retweet-->
                 <% if tweet.tweet_id %>
