@@ -1,16 +1,13 @@
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #1DA1F2">
-    <a class="navbar-brand" href="<%= root_path %>">Home</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-            <% if user_signed_in? %>
-                <li><%= link_to "Logout", destroy_user_session_path, method: :delete  %></li>
-            <% else %>
-                <li><%= link_to 'Log in', new_user_session_path %></li>
-                <li><%= link_to 'Register', new_user_registration_path %></li>
-            <% end %>
-        </ul>
+    <div class="my-auto mx-4">
+        <a class="navbar-brand text-white" href="<%= root_path %>">Inicio</a>
     </div>
+    <ul class="navbar-nav">
+        <% if user_signed_in? %>
+            <li><%= button_to "Logout", destroy_user_session_path, method: :delete, :class => 'btn btn-primary mx-4'  %></li>
+        <% else %>
+            <li><%= button_to 'Log in', new_user_session_path, :class => 'btn btn-primary mx-4' %></li>
+            <li><%= button_to 'Register', new_user_registration_path, :class => 'btn btn-primary mx-4' %></li>
+        <% end %>
+    </ul>
 </nav>
