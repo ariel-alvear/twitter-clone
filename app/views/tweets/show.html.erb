@@ -6,8 +6,10 @@
   <div>
     <% Like.where(tweet_id: @tweet.id).each do |photo| %>
       <% photo_url =  photo.user_id %>
-        <img src="<%= User.find(photo_url).photo_url%>" width="60" height="60" class="rounded-circle">
-        <p><%= User.find(photo_url).name %></p>
+        <div class="d-inline-block p-2">
+          <img src="<%= User.find(photo_url).photo_url%>" width="60" height="60" class="rounded-circle">
+          <p><%= User.find(photo_url).name %></p>
+        </div>
     <% end %>
   </div>
 </div>
