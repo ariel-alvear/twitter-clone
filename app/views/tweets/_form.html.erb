@@ -12,9 +12,9 @@
   <% end %>
 
   <div class="card text-center mx-auto col-md-6 mb-3">
-    <h5 class="card-title pt-2">Crear nuevo tweet</h5>
+    <h3 class="card-title py-3">Crear nuevo tweet</h3>
     <div class="form-group">
-        <%= form.text_area(:content) %>
+        <%= form.text_area(:content, rows: 3, class: 'col-md-7') %>
     </div>
     <div class="actions my-2">
       <button type="button" class="btn btn-primary">

@@ -1,21 +1,22 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
+    <p id="notice"><%= notice %></p>
 
-<h1>Tweets</h1>
-
+    <h1>Tweets</h1>
+</div>
 <!-- Verificamos que el usuario este logeado para poder crear tweets -->
-  <% if user_signed_in? %>
-      <%= render 'form', tweet: @tweet %>
-  <% end %>
+<% if user_signed_in? %>
+    <%= render 'form', tweet: @tweet %>
+<% end %>
 
-  <%= render 'shared/tweetslist', tweet: @tweet %>
+<div class="mx-1">
+    <%= render 'shared/tweetslist', tweet: @tweet %>
+</div>
 
 
 <br>
 
 <!-- paginamos los tweets -->
-<div class="row">
-  <div class="col-md-8 offset-md-3 mb-4">
+<div class="col-md-8 offset-md-3 mb-4 mx-0">
     <%= link_to_next_page @tweets, 'Mostrar más tweets' %>
     <%= link_to_prev_page @tweets, 'Volver a tweets anteriores' %>
-  </div>
 </div>
