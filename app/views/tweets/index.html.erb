@@ -16,7 +16,10 @@
 <br>
 
 <!-- paginamos los tweets -->
-<div class="col-md-8 offset-md-3 mb-4 mx-0">
-    <%= link_to_next_page @tweets, 'Mostrar más tweets' %>
-    <%= link_to_prev_page @tweets, 'Volver a tweets anteriores' %>
+<div class="container mx-auto">
+    <div class="col-md-8 offset-md-3 mb-4">
+        <%= link_to_next_page @tweets, 'Mostrar más tweets' %>
+        <br>
+        <%= link_to_prev_page @tweets, 'Volver a tweets anteriores' %>
+    </div>
 </div>
