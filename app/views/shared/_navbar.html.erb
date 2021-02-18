@@ -7,7 +7,7 @@
             <li><%= button_to "Logout", destroy_user_session_path, method: :delete, :class => 'btn btn-primary mx-4'  %></li>
         <% else %>
             <li><%= button_to 'Log in', new_user_session_path, :class => 'btn btn-primary mx-4' %></li>
-            <li><%= button_to 'Register', new_user_registration_path, :class => 'btn btn-primary mx-4' %></li>
+            <li><%= button_to 'Register', new_user_registration_path, method: :get, :class => 'btn btn-primary mx-4' %></li>
         <% end %>
     </ul>
 </nav>
