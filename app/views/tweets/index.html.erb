@@ -8,6 +8,28 @@
     <%= render 'form', tweet: @tweet %>
 <% end %>
 
+<!-- Modal para agregar amigos -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Agregar amigos</button>
+
+<!-- Modal con los amigos -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h3 class="modal-title" id="exampleModalLabel">Amigos para agregar</h5>
+                <!--listado de usuarios-->
+                <% @users.each do |user|%>
+                    <%= user.name %>
+                    <%= user.photo_url %>
+                    <%= user.tweets.count %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <div class="mx-1">
     <%= render 'shared/tweetslist', tweet: @tweet %>
 </div>
