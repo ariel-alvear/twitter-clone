@@ -21,8 +21,8 @@
                                     <div class="d-inline-block">
                                         <h4 class="card-title pl-3"><%= user.name %></h4>
                                     </div>
-                                    <p class="d-inline-block">Tweets <%= user.tweets.count %></p>
-                                    <%= link_to(user_friends_path(user.id), method: :post)do%><i class="far fa-thumbs-up fa-2x d-inline-block"></i><% end %>
+                                    <p>Tweets <%= user.tweets.count %></p>
+                                    <%= link_to(user_friends_path(user.id), method: :post)do%><i class="fas fa-user-plus fa-2x"></i><% end %>
                                 </div>
                             </div>
                         <% end %>
