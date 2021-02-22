@@ -22,9 +22,7 @@
                                         <h4 class="card-title pl-3"><%= user.name %></h4>
                                     </div>
                                     <p class="d-inline-block">Tweets <%= user.tweets.count %></p>
-                                    <div class="d-inline-block">
-                                        <button type="button" class="btn btn-primary pl-auto">Agregar</button>
-                                    </div>
+                                    <%= link_to(user_friends_path(user.id), method: :post)do%><i class="far fa-thumbs-up fa-2x d-inline-block"></i><% end %>
                                 </div>
                             </div>
                         <% end %>
