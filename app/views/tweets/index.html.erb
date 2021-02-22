@@ -1,35 +1,39 @@
-<div class="container">
-    <p id="notice"><%= notice %></p>
-    <h1>Tweets</h1>
-    <!-- Modal para agregar amigos -->
-    <button type="button" class="btn btn-primary d-inline-block" data-toggle="modal" data-target="#exampleModal">Agregar amigos</button>
+    <!-- Verificamos que el usuario este logeado para poder crear tweets y seguir amigos -->
+    <% if user_signed_in? %>
 
-    <!-- Modal con los amigos -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <h3 class="modal-title" id="exampleModalLabel">Amigos para agregar</h5>
-                    <!--listado de usuarios-->
-                    <% @users.each do |user|%>
-                        <div class="card mx-auto" style="width: 60%">
-                            <div class="card-body">
-                                <img src="<%= user.photo_url %>" width="60" height="60" class="rounded-circle mb-2">
-                                <div class="d-inline-block">
-                                    <h4 class="card-title pl-3"><%= user.name %></h4>
+    <div class="container">
+        <p id="notice"><%= notice %></p>
+        <h1>Tweets</h1>
+        <!-- Modal para agregar amigos -->
+        <button type="button" class="btn btn-primary d-inline-block" data-toggle="modal" data-target="#exampleModal">Agregar amigos</button>
+
+        <!-- Modal con los amigos -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <h3 class="modal-title mb-3" id="exampleModalLabel">Amigos para agregar</h5>
+                        <!--listado de usuarios-->
+                        <% @users.each do |user|%>
+                            <div class="card mx-auto mb-3" style="width: 60%">
+                                <div class="card-body text-center">
+                                    <img src="<%= user.photo_url %>" width="60" height="60" class="rounded-circle mb-2">
+                                    <div class="d-inline-block">
+                                        <h4 class="card-title pl-3"><%= user.name %></h4>
+                                    </div>
+                                    <p class="d-inline-block">Tweets <%= user.tweets.count %></p>
+                                    <div class="d-inline-block">
+                                        <button type="button" class="btn btn-primary pl-auto">Agregar</button>
+                                    </div>
                                 </div>
-                                <p>Tweets <%= user.tweets.count %></p>
-                                <button type="button" class="btn btn-primary pl-auto">Agregar</button>
                             </div>
-                        </div>
-                    <% end %>
+                        <% end %>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<!-- Verificamos que el usuario este logeado para poder crear tweets -->
-<% if user_signed_in? %>
+
     <%= render 'form', tweet: @tweet %>
 <% end %>
 
