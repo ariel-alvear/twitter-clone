@@ -3,7 +3,11 @@ class TweetsController < ApplicationController
 
   # GET /tweets or /tweets.json
   def index
-    @tweets = Tweet.all.page(params[:page]).order("created_at DESC")
+    if user_signed_in?
+      @tweets = Tweet.tweets_for_me(current_user).page(params[:page]).order("created_at DESC")
+    else
+      @tweets = Tweet.all.page(params[:page]).order("created_at DESC")
+    end
     @tweet = Tweet.new
     @@retweet = 0
     @users = User.all

@@ -17,4 +17,13 @@ class Tweet < ApplicationRecord
     def get_like_photo
         self.likes.user_id.photo_url
     end
+
+    def self.tweets_for_me(x)
+        @my_friends = Friend.where(user_id: x.id)
+        friend_id_array = []
+        @my_friends.each do |my_friend|
+            friend_id_array << my_friend.friend_id
+        end
+        self.where(user_id: friend_id_array)
+    end
 end
