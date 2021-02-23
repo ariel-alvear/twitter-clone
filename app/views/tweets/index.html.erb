@@ -18,19 +18,16 @@
                             <!-- evitamos que usuario pueda seguirse a sí mismo -->
                             <% if user.id == current_user.id %>
                             <% else %>
-                                <% if user.id == Friend.find_by(user_id: current_user.id).friend_id %>
-                                <% else %>
-                                    <div class="card mx-auto mb-3" style="width: 60%">
-                                        <div class="card-body text-center">
-                                            <img src="<%= user.photo_url %>" width="60" height="60" class="rounded-circle mb-2">
-                                            <div class="d-inline-block">
-                                                <h4 class="card-title pl-3"><%= user.name %></h4>
-                                            </div>
-                                            <p>Tweets <%= user.tweets.count %></p>
-                                            <%= link_to(user_friends_path(user.id), method: :post)do%><i class="fas fa-user-plus fa-2x"></i><% end %>
+                                <div class="card mx-auto mb-3" style="width: 60%">
+                                    <div class="card-body text-center">
+                                        <img src="<%= user.photo_url %>" width="60" height="60" class="rounded-circle mb-2">
+                                        <div class="d-inline-block">
+                                            <h4 class="card-title pl-3"><%= user.name %></h4>
                                         </div>
+                                        <p>Tweets <%= user.tweets.count %></p>
+                                        <%= link_to(user_friends_path(user.id), method: :post)do%><i class="fas fa-user-plus fa-2x"></i><% end %>
                                     </div>
-                                <% end %>
+                                </div>
                             <% end %>
                         <% end %>
                     </div>
