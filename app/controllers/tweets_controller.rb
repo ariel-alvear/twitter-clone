@@ -5,12 +5,12 @@ class TweetsController < ApplicationController
   def index
     if user_signed_in?
       @tweets = Tweet.tweets_for_me(current_user).page(params[:page]).order("created_at DESC")
+      @users = User.add_friends(current_user)s
     else
       @tweets = Tweet.all.page(params[:page]).order("created_at DESC")
     end
     @tweet = Tweet.new
     @@retweet = 0
-    @users = User.add_friends(current_user)
   end
 
   # GET /tweets/1 or /tweets/1.json
