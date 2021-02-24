@@ -10,7 +10,7 @@ class TweetsController < ApplicationController
     end
     @tweet = Tweet.new
     @@retweet = 0
-    @users = User.all
+    @users = User.add_friends(current_user)
   end
 
   # GET /tweets/1 or /tweets/1.json

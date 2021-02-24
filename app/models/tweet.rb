@@ -24,6 +24,6 @@ class Tweet < ApplicationRecord
         @my_friends.each do |my_friend|
             friend_id_array << my_friend.friend_id
         end
-        self.where(user_id: friend_id_array)
+        self.where(user_id: friend_id_array).or(self.where(user_id: x.id))
     end
 end
