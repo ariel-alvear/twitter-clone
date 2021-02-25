@@ -4,8 +4,8 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :tweets
-  has_many :likes
+  has_many :tweets, dependent: :destroy
+  has_many :likes, dependent: :destroy
   
   has_many :added_friends, :class_name => 'Friend', :foreign_key => 'user_id'
   has_many :followers, :class_name => 'Friend', :foreign_key => 'friend_id'
