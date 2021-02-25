@@ -8,6 +8,6 @@
 
 100.times do
     Tweet.create(content: "Seed Tweet", user_id: 3)
-endAdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+end
 
-AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+AdminUser.create!(email: 'example@domain.com', password: 'password123', password_confirmation: 'password123') if Rails.env.development?
