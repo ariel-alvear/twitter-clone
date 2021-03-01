@@ -10,4 +10,12 @@
             <li><%= button_to 'Registrarse', new_user_registration_path, method: :get, :class => 'btn btn-primary mx-4' %></li>
         <% end %>
     </ul>
+        <form class="form-inline">
+        <div class="d-inline-block">
+            <input class="form-control" type="search" placeholder="Buscar" aria-label="Buscar" name="tweetsearch">
+        </div>
+        <div class="d-inline-block">
+            <button class="btn btn-outline-light" type="submit">Buscar</button>
+        </div>
+    </form>
 </nav>
