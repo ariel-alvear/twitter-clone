@@ -26,7 +26,7 @@ class Tweet < ApplicationRecord
         end
         self.where(user_id: friend_id_array).or(self.where(user_id: x.id))
     end
-
+    
     def self.search_my_tweets(x)
         @my_tweets = Tweet.all
         my_tweet_id_array = []
@@ -36,5 +36,16 @@ class Tweet < ApplicationRecord
             end
         end
         self.where(id: my_tweet_id_array)
+    end
+
+    def self.all_hashtags
+        @tweets = Tweet.all
+        content_array = [] 
+        hashtags = []
+        @tweets.each do |tweet|
+            content_array << tweet.content.split
+            content_array
+        end
+        hashtags = content_array.flatten.select { |word| word.start_with?("#") }
     end
 end
