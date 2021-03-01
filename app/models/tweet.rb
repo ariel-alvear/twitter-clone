@@ -47,5 +47,6 @@ class Tweet < ApplicationRecord
             content_array
         end
         hashtags = content_array.flatten.select { |word| word.start_with?("#") }
+        hashtags.uniq
     end
 end
