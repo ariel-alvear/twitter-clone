@@ -37,16 +37,4 @@ class Tweet < ApplicationRecord
         end
         self.where(id: my_tweet_id_array)
     end
-
-    def self.all_hashtags
-        @tweets = Tweet.all
-        content_array = [] 
-        hashtags = []
-        @tweets.each do |tweet|
-            content_array << tweet.content.split
-            content_array
-        end
-        hashtags = content_array.flatten.select { |word| word.start_with?("#") }
-        hashtags.uniq
-    end
 end

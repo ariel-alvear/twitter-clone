@@ -10,7 +10,9 @@ class TweetsController < ApplicationController
       @tweets = Tweet.all.page(params[:page]).order("created_at DESC")
     end
     @tweet = Tweet.new
+
     @@retweet = 0
+    
     if params[:tweetsearch].present?
       @tweets = Tweet.search_my_tweets(params[:tweetsearch]).page(params[:page]).order("created_at DESC")
     end

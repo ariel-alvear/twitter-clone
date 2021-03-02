@@ -6,7 +6,16 @@
                 <h4 class="card-title"><%= tweet.get_user_name %></h5>
                 <img src="<%= tweet.get_user_photo %>" width="60" height="60" class="rounded-circle">
                 <div class="d-inline-block p-4">
-                    <p><%= tweet.content %></p>
+                    <p>
+                        <% my_content_array = tweet.content.split%>
+                        <% my_content_array.each do |element| %>
+                            <% if element.start_with?("#") %>
+                                <a href="#"><%= element %></a>
+                            <% else %>
+                                <%= element %>
+                            <% end %>
+                        <% end %>
+                    </p>
                 </div>
                 <!-- solo el propio usuario puede editar y borrar su tweet -->
                 <% if user_signed_in? %>
