@@ -37,4 +37,15 @@ class Tweet < ApplicationRecord
         end
         self.where(id: my_tweet_id_array)
     end
+
+    def as_json(*args)
+        {
+            :id => self.id,
+            :content => self.content,
+            :user_id => self.user_id,
+            :like_count => self.likes.count,
+            :retweets_count => self.retweets.count,
+            :retwitted_from => self.tweet_id,
+        }
+    end
 end
