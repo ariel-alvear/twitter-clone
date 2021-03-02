@@ -34,7 +34,16 @@
                                 <h4><%= retweet.get_user_name %></h4>
                                 <img src="<%= retweet.get_user_photo %>" width="60" height="60" class="rounded-circle">
                                 <div class="d-inline-block p-4">
-                                    <p><%= retweet.content %></p>
+                                    <p>
+                                        <% my_content_array = retweet.content.split%>
+                                        <% my_content_array.each do |element| %>
+                                            <% if element.start_with?("#") %>
+                                                <a href="#"><%= element %></a>
+                                            <% else %>
+                                                <%= element %>
+                                            <% end %>
+                                        <% end %>
+                                    </p>
                                 </div>
                             </div>
                         </div>

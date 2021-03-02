@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :friends
   end
 
-  get '/hashtags/index'
+  get '/api/news'
   
 
   root to: 'tweets#index'
