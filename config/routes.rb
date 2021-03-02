@@ -15,7 +15,7 @@ Rails.application.routes.draw do
     resources :friends
   end
 
-  get '/api/news'
+  get '/api/news', to: 'api#index'
   
 
   root to: 'tweets#index'
