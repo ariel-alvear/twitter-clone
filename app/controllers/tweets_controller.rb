@@ -3,22 +3,23 @@ class TweetsController < ApplicationController
 
   # GET /tweets or /tweets.json
   def index
+    @tweet = Tweet.new
+    @@retweet = 0
+
     if user_signed_in?
+      @users = User.add_friends(current_user)
+    end
+    
+    if params[:tweetsearch].present?
+      @tweets = Tweet.search_my_tweets(params[:tweetsearch]).page(params[:page]).order("created_at DESC")
+    elsif params[:hashtag].present?
+      @tweets = Tweet.search_my_tweets("##{params[:hashtag]}").page(params[:page]).order("created_at DESC")
+      @users = User.add_friends(current_user)
+    elsif user_signed_in?
       @tweets = Tweet.tweets_for_me(current_user).page(params[:page]).order("created_at DESC")
       @users = User.add_friends(current_user)
     else
       @tweets = Tweet.all.page(params[:page]).order("created_at DESC")
-    end
-    @tweet = Tweet.new
-
-    @@retweet = 0
-    
-    if params[:tweetsearch].present?
-      @tweets = Tweet.search_my_tweets(params[:tweetsearch]).page(params[:page]).order("created_at DESC")
-    end
-
-    if params[:hashtag].present?
-      @tweets = Tweet.search_my_tweets("##{params[:hashtag]}").page(params[:page]).order("created_at DESC")
     end
   end
 
