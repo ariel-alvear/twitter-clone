@@ -15,6 +15,8 @@ Rails.application.routes.draw do
     resources :friends
   end
 
+  get '/:hashtag', to: 'tweets#hashtag_search', as: 'hashtag'
+
   get '/api/news', to: 'api#index'
   get "/api/:date1/:date2", to: 'api#between_dates'
   

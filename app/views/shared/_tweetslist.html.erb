@@ -10,7 +10,8 @@
                         <% my_content_array = tweet.content.split%>
                         <% my_content_array.each do |element| %>
                             <% if element.start_with?("#") %>
-                                <a href="#"><%= element %></a>
+                                <% element.slice!(0) %>
+                                <a href="?hashtag=<%= element %>">#<%= element %></a>
                             <% else %>
                                 <%= element %>
                             <% end %>
@@ -38,7 +39,8 @@
                                         <% my_content_array = retweet.content.split%>
                                         <% my_content_array.each do |element| %>
                                             <% if element.start_with?("#") %>
-                                                <a href="#"><%= element %></a>
+                                                <% element.slice!(0) %>
+                                                <a href="?hashtag=<%= element %>">#<%= element %></a>
                                             <% else %>
                                                 <%= element %>
                                             <% end %>
