@@ -1,5 +1,6 @@
 class ApiController < ApplicationController
     before_action :set_tweet, only: %i[ show edit update destroy ]
+    skip_before_action :verify_authenticity_token
 
     def index
         @tweets = Tweet.all.order("created_at DESC").limit(50)
@@ -12,6 +13,17 @@ class ApiController < ApplicationController
         last_date = params[:date2]
         @tweets = Tweet.where(:created_at => first_date..last_date)
         render json: @tweets
+    end
+
+    # POST /api/create
+    def create
+        @tweet = Tweet.new(tweet_params)
+
+        if @tweet.save
+            render json: @tweet, status: :created, location: @tweet
+        else
+            render json: @tweet.errors, status: :unprocessable_entity
+        end
     end
 
     
