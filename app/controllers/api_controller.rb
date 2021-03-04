@@ -2,7 +2,7 @@ class ApiController < ApplicationController
     before_action :set_tweet, only: %i[ show edit update destroy ]
 
     def index
-        @tweets = Tweet.all
+        @tweets = Tweet.all.order("created_at DESC").limit(50)
 
         render json: @tweets
     end
