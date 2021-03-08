@@ -72,3 +72,6 @@ end
 # Active Admin is a framework for creating administration style interfaces. It abstracts common business application patterns to make it simple for developers to implement beautiful and elegant interfaces with very little effort.
 
 gem 'activeadmin'
+
+#api authentication
+gem 'devise_token_auth'

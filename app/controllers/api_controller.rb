@@ -1,11 +1,14 @@
 class ApiController < ApplicationController
     before_action :set_tweet, only: %i[ show edit update destroy ]
-    skip_before_action :verify_authenticity_token
 
     def index
-        @tweets = Tweet.all.order("created_at DESC").limit(50)
+        if request.headers['X-API-KEY'].present? && User.find_by(api_key: request.headers['X-API-KEY'])
+            @tweets = Tweet.all.order("created_at DESC").limit(50)
 
-        render json: @tweets
+            render json: @tweets
+        else
+            return render json: {mensaje:"falta colocar key = X-API-KEY o registrar al usuario"}
+        end
     end
 
     def between_dates
@@ -17,12 +20,18 @@ class ApiController < ApplicationController
 
     # POST /api/create
     def create
-        @tweet = Tweet.new(tweet_params)
+        if request.headers['X-API-KEY'].present? && User.find_by(api_key: request.headers['X-API-KEY'])
 
-        if @tweet.save
-            render json: @tweet, status: :created, location: @tweet
-        else
-            render json: @tweet.errors, status: :unprocessable_entity
+            @tweet = Tweet.new(tweet_params)
+
+            if @tweet.save
+                render json: @tweet, status: :created, location: @tweet
+            else
+                render json: @tweet.errors, status: :unprocessable_entity
+            end
+
+        else 
+            return render json: {mensaje:"falta colocar key = X-API-KEY o registrar al usuario"}
         end
     end
 

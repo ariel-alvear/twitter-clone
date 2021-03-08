@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  before_create :set_api_key
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -19,5 +21,9 @@ class User < ApplicationRecord
       end
       self.where.not(id: friend_id_array)
     end
+  end
+
+  def set_api_key
+    self.api_key = generate_api_key
   end
 end
