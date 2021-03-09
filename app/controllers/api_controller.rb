@@ -1,4 +1,4 @@
-class ApiController < ApplicationController
+class ApiController < ActionController::API
     before_action :set_tweet, only: %i[ show edit update destroy ]
 
     def index
@@ -27,7 +27,7 @@ class ApiController < ApplicationController
             end
 
         else 
-            return render json: {mensaje:"falta colocar key = X-API-KEY o registrar al usuario"}
+            return render json: {mensaje:"Api-key missing or wrong"}
         end
     end
 
