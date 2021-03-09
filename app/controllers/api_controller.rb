@@ -2,13 +2,9 @@ class ApiController < ApplicationController
     before_action :set_tweet, only: %i[ show edit update destroy ]
 
     def index
-        if request.headers['X-API-KEY'].present? && User.find_by(api_key: request.headers['X-API-KEY'])
-            @tweets = Tweet.all.order("created_at DESC").limit(50)
+        @tweets = Tweet.all.order("created_at DESC").limit(50)
 
-            render json: @tweets
-        else
-            return render json: {mensaje:"falta colocar key = X-API-KEY o registrar al usuario"}
-        end
+        render json: @tweets
     end
 
     def between_dates
